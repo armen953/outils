@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout}">
+
+<head>
+    <title>Welcome to Our Site</title>
+    <!-- Include Choices CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+    <!-- Include Choices JavaScript (latest) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+    <script defer type="module" src="../static/js/lib/drop-files-element.js"
+        th:src="@{/js/lib/drop-files-element.js}"></script>
+
+    <script defer src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+
+</head>
+
+<body>
+    <th:block layout:fragment="content">
+        <main>
+            <div class="container mt-5">
+
+                <p th:text="${message}" th:if="${message ne null}" class="alert alert-primary"></p>
+
+                <form class="row g-3" method="post" action="form.html" th:action="@{/form}" th:object="${testForm}"
+                    enctype="multipart/form-data">
+
+                    <div class="form-floating mb-3">
+                        <input type="text" th:filed="*{nom}" name="nom" class="form-control" id="floatingInput" placeholder="nom">
+                        <label for="floatingInput">Nom</label>
+                    </div>
+
+                    <div class="form-floating">
+                        <input type="text" th:filed="*{prenom}" name="prenom" class="form-control" id="floatingPassword"
+                            placeholder="prenom">
+                        <label for="floatingPassword">Prénom</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <select class="form-control js-choice" th:filed="*{fileFormat}" name="fileFormat" placeholder="This is a search placeholder">
+                            <option value="">Choisir le file format</option>
+                            <option th:each="ff : ${fileFormats}" th:value="${ff}" th:text="${ff}"></option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Fichier a déposer</label>
+                        <input type="file" th:filed="${fichier}"  name="fichier" class="form-control" id="file"
+                            label="Déposez vos fichiers ou cliquez ici." is="drop-files">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Sign in</button>
+                    </div>
+                </form>
+
+            </div>
+        </main>
+    </th:block>
+</body>
+
+</html>

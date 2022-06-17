@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr" 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/layout}">
+<head>
+
+<!-- Include Choices CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+/>
+<!-- Include Choices JavaScript (latest) -->
+<script defer src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+<script defer type="module" src="../static/js/lib/drop-files-element.js" th:src="@{/js/lib/drop-files-element.js}"></script>
+
+<script defer src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+
+</head>
+<body>
+<th:block layout:fragment="content">
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1 class="mt-5">Sticky footer with fixed navbar</h1>
+        <div>[[ ${message} ]]</div>
+        <div th:utext="${message}"></div>
+        <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code class="small">padding-top: 60px;</code> on the <code class="small">main &gt; .container</code>.</p>
+        <p>Back to <a href="/docs/5.1/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
+        <a href="test.html" th:href="@{/test}">Vers test</a>
+        <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Check me out</label>
+            </div>
+      
+            <select
+                class="form-control js-choice"
+                data-trigger
+                name="choices-single-default"
+                id="choices-single-default"
+                placeholder="This is a search placeholder"
+            >
+                <option value="">Choisir le file format</option>
+                <option th:each="fileFormat : ${fileFormats}"  th:text="${fileFormat}"></option>
+            </select>
+            
+            <input
+                    type="file"
+                    multiple
+                    name="files[]"
+                    label="Déposez vos fichiers ou cliquez ici."
+                    is="drop-files"
+            />
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form>
+    </div>
+
+</main>
+</th:block>
+</body>
+</html>
